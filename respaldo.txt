@@ -1,0 +1,96 @@
+    #################################### PLANES ############################
+    planes := models.ListPlanes()
+	fmt.Println(planes)
+
+	plan := models.CreatePlan("Diario", 5000, 1, "DIA", false, 0)
+	fmt.Println(plan)
+
+	plan = models.CreatePlan("Mensual", 30000, 1, "MES", true, 5000)
+	fmt.Println(plan)
+
+	plan = models.CreatePlan("Anual", 170000, 1, "AÑO", true, 20000)
+	fmt.Println(plan)
+
+	plan = models.CreatePlan("Semestral", 120000, 6, "MES", true, 20000)
+	fmt.Println(plan)
+
+	plan = models.CreatePlan("Trimestral", 90000, 3, "MES", true, 20000)
+	fmt.Println(plan)
+
+	plan = models.CreatePlan("HL Mensual", 20000, 1, "MES", false, 0)
+	fmt.Println(plan)
+
+	plan = models.CreatePlan("HL Anual", 140000, 1, "AÑO", true, 20000)
+	fmt.Println(plan)
+
+	plan = models.CreatePlan("InBody", 15000, 1, "DIA", false, 0)
+	fmt.Println(plan)
+
+	planes = models.ListPlanes()
+	fmt.Println(planes)
+
+ #################################### SOCIOS DE PRUEBAS ############################
+
+
+
+    socios := models.ListSocios()
+	fmt.Println(socios)
+
+    socio := models.CreateSocio("1-9", "Socio Prueba", "Prueba", "Prueba", "Masculino", "prueba@gmail.com", "+56 9 9999 9999", false)
+	fmt.Println(socio)
+	socio = models.CreateSocio("14125469-3", "Juan Daniel", "Muñoz", "Queupul", "Masculino", "jdannymq@gmail.com", "+56 9 9334 0146", true)
+	fmt.Println(socio)
+
+	socio := models.CreateSocio("1-9", "Socio de Prueba", "Pruebas", "Pruebas", "Femenino", "prueba@gmail.com", "+56 9 9999 9999", false)
+	fmt.Println(socio)
+
+	socios = models.ListSocios()
+	fmt.Println(socios)
+
+     #################################### INSTRUCTORES ############################
+
+    instructores := models.ListInstructores()
+	fmt.Println(instructores)
+
+	instructor := models.CreateInstructor("Ayax GrossPellier", true)
+	fmt.Println(instructor)
+
+	instructor = models.CreateInstructor("Gaston GrossPellier", true)
+	fmt.Println(instructor)
+
+	instructor = models.CreateInstructor("Luis Quezadas", true)
+	fmt.Println(instructor)
+
+	instructores = models.ListInstructores()
+	fmt.Println(instructores)
+
+
+    #################################### SUSCRIPCIONES ############################
+
+	suscripciones := models.ListSuscripciones()
+	fmt.Println(suscripciones)
+
+	timecurrent := (time.Now()).Format(time.RFC3339Nano)
+	fmt.Println(timecurrent)
+
+	suscripcion := models.CreateSuscripcion(timecurrent, "456789765", 1, 1, 30000, 20000, 3, timecurrent, 1, "1-9")
+	fmt.Println(suscripcion)
+
+	suscripciones = models.ListSuscripciones()
+	fmt.Println(suscripciones)
+
+  #################################### INBODY ############################
+
+	inbodys := models.ListInbodys()
+	fmt.Println(inbodys)
+
+	timecurrent := (time.Now()).Format(time.RFC3339Nano)
+	fmt.Println(timecurrent)
+
+	inbody := models.CreateInbody("14125469-3", false, "{\"key\": \"value\"}", timecurrent, "comentarios", 2)
+	fmt.Println(inbody)
+
+	inbodys = models.ListInbodys()
+	fmt.Println(inbodys)
+
+
