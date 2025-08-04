@@ -13,6 +13,8 @@ func main() {
 
 	models.MigrarTiposPagos()
 	models.MigrarEstados()
+	models.MigrarPlanes()
+
 	mux := mux.NewRouter()
 
 	/*Endpoints de  los medios de pagos*/
@@ -29,7 +31,12 @@ func main() {
 	mux.HandleFunc("/api/estado/{id:[0-9]+}", handlers.UpdateEstado).Methods("PUT")
 	mux.HandleFunc("/api/estado/{id:[0-9]+}", handlers.DeleteEstado).Methods("DELETE")
 
-	/* endpoints de los  */
+	/* endpoints de los planes */
+	mux.HandleFunc("/api/plan/", handlers.GetPlanes).Methods("GET")
+	mux.HandleFunc("/api/plan/{id:[0-9]+}", handlers.GetPlan).Methods("GET")
+	mux.HandleFunc("/api/plan/", handlers.CreatePlan).Methods("POST")
+	mux.HandleFunc("/api/plan/{id:[0-9]+}", handlers.UpdatePlan).Methods("PUT")
+	mux.HandleFunc("/api/plan/{id:[0-9]+}", handlers.DeletePlan).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":3000", mux))
 

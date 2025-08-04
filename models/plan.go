@@ -1,7 +1,9 @@
 package models
 
+import "gorm/db"
+
 type Plan struct {
-	IdPlan         int64  `json:"id_plan"`
+	IdPlan         int64  `json:"id_plan" gorm:"primaryKey"`
 	TipoPlan       string `json:"tipo_plan"`
 	MontoPlan      int64  `json:"monto_plan"`
 	Duracion       int    `json:"duracion"`
@@ -10,7 +12,14 @@ type Plan struct {
 	MontoMatricula int64  `json:"monto_matricula"`
 }
 
-/*
+func MigrarPlanes() {
+	db.Database.AutoMigrate(Plan{})
+}
+
+func (Plan) TableName() string {
+	return "plan"
+}
+
 type Planes []Plan
 
 const PlanShema string = `CREATE TABLE db_grossgym_fitness.plan (
@@ -28,6 +37,7 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 `
 
+/*
 func NewPlan(tipoPlan string, montoPlan int64, duracion int, unidad string, isMatricula bool, montoMatricula int64) *Plan {
 	plan := &Plan{TipoPlan: tipoPlan, MontoPlan: montoPlan, Duracion: duracion, Unidad: unidad, IsMatricula: isMatricula, MontoMatricula: montoMatricula}
 	return plan
