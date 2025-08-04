@@ -1,7 +1,9 @@
 package models
 
+import "gorm/db"
+
 type Estado struct {
-	IdEstado    int64  `json:"id_estado"`
+	IdEstado    int64  `json:"id_estado" gorm:"primaryKey"`
 	Descripcion string `json:"descripcion"`
 	Habilitado  bool   `json:"habilitado"`
 }
@@ -18,6 +20,14 @@ ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 `
+
+func MigrarEstados() {
+	db.Database.AutoMigrate(Estado{})
+}
+
+func (Estado) TableName() string {
+	return "estado"
+}
 
 /*
 func NewEstado(descripcion string, habilitado bool) *Estado {
