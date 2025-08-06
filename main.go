@@ -38,6 +38,13 @@ func main() {
 	mux.HandleFunc("/api/plan/{id:[0-9]+}", handlers.UpdatePlan).Methods("PUT")
 	mux.HandleFunc("/api/plan/{id:[0-9]+}", handlers.DeletePlan).Methods("DELETE")
 
+	/* endpoints de los socios */
+	mux.HandleFunc("/api/socio/", handlers.GetSocios).Methods("GET")
+	mux.HandleFunc("/api/socio/{rut:[a-zA-Z0-9-]+}", handlers.GetSocio).Methods("GET")
+	mux.HandleFunc("/api/socio/", handlers.CreateSocio).Methods("POST")
+	mux.HandleFunc("/api/socio/{rut:[a-zA-Z0-9-]+}", handlers.UpdateSocio).Methods("PUT")
+	mux.HandleFunc("/api/socio/{rut:[a-zA-Z0-9-]+}", handlers.DeleteSocio).Methods("DELETE")
+
 	log.Fatal(http.ListenAndServe(":3000", mux))
 
 }

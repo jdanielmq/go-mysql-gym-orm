@@ -1,7 +1,9 @@
 package models
 
+import "gorm/db"
+
 type Socio struct {
-	Rut             string `json:"rut"`
+	Rut             string `json:"rut" gorm:"primaryKey"`
 	Nombres         string `json:"nombres"`
 	ApellidoPaterno string `json:"apellido_paterno"`
 	ApellidoMaterno string `json:"apellido_materno"`
@@ -11,7 +13,6 @@ type Socio struct {
 	Habilitado      bool   `json:"habilitado"`
 }
 
-/*
 type Socios []Socio
 
 const SocioShema string = `CREATE TABLE db_grossgym_fitness.socio (
@@ -30,6 +31,15 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 `
 
+func MigrarSocio() {
+	db.Database.AutoMigrate(Socio{})
+}
+
+func (Socio) TableName() string {
+	return "socio"
+}
+
+/*
 func NewSocio(rut string, nombres string, apellidoPaterno string, apellidoMaterno string,
 	genero string, correo string, celular string, habilitado bool) *Socio {
 	socio := &Socio{Rut: rut, Nombres: nombres, ApellidoPaterno: apellidoPaterno, ApellidoMaterno: apellidoMaterno, Genero: genero, Correo: correo, Celular: celular, Habilitado: habilitado}

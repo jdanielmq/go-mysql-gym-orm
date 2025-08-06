@@ -1,12 +1,13 @@
 package models
 
+import "gorm/db"
+
 type Instructor struct {
-	IdInstructor     int64  `json:"id_instructor"`
+	IdInstructor     int64  `json:"id_instructor" gorm:"primaryKey"`
 	NombreInstructor string `json:"nombre_instructor"`
 	Habilitado       bool   `json:"habilitado"`
 }
 
-/*
 type Instructores []Instructor
 
 const InstructorShema string = `CREATE TABLE db_grossgym_fitness.instructor (
@@ -20,6 +21,15 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 `
 
+func MigrarInstructor() {
+	db.Database.AutoMigrate(Instructor{})
+}
+
+func (Instructor) TableName() string {
+	return "instructor"
+}
+
+/*
 func NewInstructor(nombreInstructor string, habilitado bool) *Instructor {
 	instructor := &Instructor{NombreInstructor: nombreInstructor, Habilitado: habilitado}
 	return instructor
