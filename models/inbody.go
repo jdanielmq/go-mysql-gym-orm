@@ -3,7 +3,7 @@ package models
 import "gorm/db"
 
 type InBody struct {
-	IdBody          int64  `json:"id_body"`
+	IdBody          int64  `json:"id_body" gorm:"primaryKey"`
 	IdSocio         string `json:"id_socio"`
 	Habilitado      bool   `json:"habilitado"`
 	JsonInbody      string `json:"json_inbody"`

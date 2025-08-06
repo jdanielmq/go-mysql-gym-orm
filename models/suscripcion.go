@@ -1,7 +1,9 @@
 package models
 
+import "gorm/db"
+
 type Suscripcion struct {
-	IdSuscripcion  int64  `json:"id_suscripcion"`
+	IdSuscripcion  int64  `json:"id_suscripcion" gorm:"primaryKey"`
 	FechaCreacion  string `json:"fecha_creacion"`
 	NroTransaccion string `json:"nro_transaccion"`
 	IdTipoPago     int64  `json:"id_tipo_pago"`
@@ -14,7 +16,6 @@ type Suscripcion struct {
 	IdSocio        string `json:"is_socio"`
 }
 
-/*
 type Suscripciones []Suscripcion
 
 const SuscripcionShema string = `CREATE TABLE db_grossgym_fitness.suscripcion (
@@ -40,6 +41,15 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 `
 
+func MigrarSuscripciones() {
+	db.Database.AutoMigrate(Suscripcion{})
+}
+
+func (Suscripcion) TableName() string {
+	return "suscripcion"
+}
+
+/*
 func NewSuscripcion(fechaCreacion string, nroTransaccion string, idPago int64, idPlan int64, montoPlan int64, montoMatricula int64,
 	nroCuotas int, fechaTermino string, idEstado int64, idSocio string) *Suscripcion {
 	suscripcion := &Suscripcion{FechaCreacion: fechaCreacion, NroTransaccion: nroTransaccion, IdPago: idPago, IdPlan: idPlan, MontoPlan: montoPlan,

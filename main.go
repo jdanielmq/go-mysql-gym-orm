@@ -17,7 +17,7 @@ func main() {
 	models.MigrarSocios()
 	models.MigrarInstructores()
 	models.MigrarInbodys()
-	models.MigrarInbodys()
+	models.MigrarSuscripciones()
 
 	mux := mux.NewRouter()
 
@@ -56,12 +56,19 @@ func main() {
 	mux.HandleFunc("/api/instructor/{id:[0-9]+}", handlers.UpdateInstructor).Methods("PUT")
 	mux.HandleFunc("/api/instructor/{id:[0-9]+}", handlers.DeleteInstructor).Methods("DELETE")
 
-	/* endpoints de los instructor */
+	/* endpoints de los inbody */
 	mux.HandleFunc("/api/inbody/", handlers.GetInbodys).Methods("GET")
 	mux.HandleFunc("/api/inbody/{id:[0-9]+}", handlers.GetInbody).Methods("GET")
 	mux.HandleFunc("/api/inbody/", handlers.CreateInbody).Methods("POST")
 	mux.HandleFunc("/api/inbody/{id:[0-9]+}", handlers.UpdateInBody).Methods("PUT")
 	mux.HandleFunc("/api/inbody/{id:[0-9]+}", handlers.DeleteInbody).Methods("DELETE")
+
+	/* endpoints de los suscripcion */
+	mux.HandleFunc("/api/suscripcion/", handlers.GetSuscripciones).Methods("GET")
+	mux.HandleFunc("/api/suscripcion/{id:[0-9]+}", handlers.GetSuscripcion).Methods("GET")
+	mux.HandleFunc("/api/suscripcion/", handlers.CreateSuscripcion).Methods("POST")
+	mux.HandleFunc("/api/suscripcion/{id:[0-9]+}", handlers.UpdateSuscripcion).Methods("PUT")
+	mux.HandleFunc("/api/suscripcion/{id:[0-9]+}", handlers.DeleteSuscripcion).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":3000", mux))
 
