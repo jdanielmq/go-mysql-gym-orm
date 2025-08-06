@@ -31,7 +31,7 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 `
 
-func MigrarSocio() {
+func MigrarSocios() {
 	db.Database.AutoMigrate(Socio{})
 }
 

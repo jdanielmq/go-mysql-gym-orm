@@ -14,6 +14,10 @@ func main() {
 	models.MigrarTiposPagos()
 	models.MigrarEstados()
 	models.MigrarPlanes()
+	models.MigrarSocios()
+	models.MigrarInstructores()
+	models.MigrarInbodys()
+	models.MigrarInbodys()
 
 	mux := mux.NewRouter()
 
@@ -44,6 +48,20 @@ func main() {
 	mux.HandleFunc("/api/socio/", handlers.CreateSocio).Methods("POST")
 	mux.HandleFunc("/api/socio/{rut:[a-zA-Z0-9-]+}", handlers.UpdateSocio).Methods("PUT")
 	mux.HandleFunc("/api/socio/{rut:[a-zA-Z0-9-]+}", handlers.DeleteSocio).Methods("DELETE")
+
+	/* endpoints de los instructor */
+	mux.HandleFunc("/api/instructor/", handlers.GetInstructores).Methods("GET")
+	mux.HandleFunc("/api/instructor/{id:[0-9]+}", handlers.GetInstructor).Methods("GET")
+	mux.HandleFunc("/api/instructor/", handlers.CreateInstructor).Methods("POST")
+	mux.HandleFunc("/api/instructor/{id:[0-9]+}", handlers.UpdateInstructor).Methods("PUT")
+	mux.HandleFunc("/api/instructor/{id:[0-9]+}", handlers.DeleteInstructor).Methods("DELETE")
+
+	/* endpoints de los instructor */
+	mux.HandleFunc("/api/inbody/", handlers.GetInbodys).Methods("GET")
+	mux.HandleFunc("/api/inbody/{id:[0-9]+}", handlers.GetInbody).Methods("GET")
+	mux.HandleFunc("/api/inbody/", handlers.CreateInbody).Methods("POST")
+	mux.HandleFunc("/api/inbody/{id:[0-9]+}", handlers.UpdateInBody).Methods("PUT")
+	mux.HandleFunc("/api/inbody/{id:[0-9]+}", handlers.DeleteInbody).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":3000", mux))
 

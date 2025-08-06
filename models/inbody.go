@@ -1,5 +1,7 @@
 package models
 
+import "gorm/db"
+
 type InBody struct {
 	IdBody          int64  `json:"id_body"`
 	IdSocio         string `json:"id_socio"`
@@ -10,7 +12,6 @@ type InBody struct {
 	IdInstructor    int64  `json:"id_instructor"`
 }
 
-/*
 type Inbodys []InBody
 
 const InBodyShema string = `CREATE TABLE db_grossgym_fitness.inbody (
@@ -30,6 +31,15 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 `
 
+func MigrarInbodys() {
+	db.Database.AutoMigrate(InBody{})
+}
+
+func (InBody) TableName() string {
+	return "inbody"
+}
+
+/*
 func NewInBody(idSocio string, habilitado bool, jsonInbody string, fechaEvaluacion string, comentario string, idInstructor int64) *InBody {
 	inbody := &InBody{IdSocio: idSocio, Habilitado: habilitado, JsonInbody: jsonInbody, FechaEvaluacion: fechaEvaluacion, Comentario: comentario, IdInstructor: idInstructor}
 	return inbody
