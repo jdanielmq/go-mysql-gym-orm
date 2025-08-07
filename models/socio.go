@@ -3,7 +3,7 @@ package models
 import "gorm/db"
 
 type Socio struct {
-	Rut             string `json:"rut" gorm:"primaryKey"`
+	Rut             string `json:"rut" gorm:"primaryKey;type:VARCHAR(10)"`
 	Nombres         string `json:"nombres"`
 	ApellidoPaterno string `json:"apellido_paterno"`
 	ApellidoMaterno string `json:"apellido_materno"`
@@ -24,7 +24,7 @@ const SocioShema string = `CREATE TABLE db_grossgym_fitness.socio (
 	correo varchar(200) NOT NULL,
 	celular varchar(100) NOT NULL,
 	habilitado BOOL NOT NULL,
-	CONSTRAINT socio_pk PRIMARY KEY (rut)
+	CONSTRAINT rut_pk PRIMARY KEY (rut)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4

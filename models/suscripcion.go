@@ -6,14 +6,14 @@ type Suscripcion struct {
 	IdSuscripcion  int64  `json:"id_suscripcion" gorm:"primaryKey"`
 	FechaCreacion  string `json:"fecha_creacion"`
 	NroTransaccion string `json:"nro_transaccion"`
-	IdTipoPago     int64  `json:"id_tipo_pago"`
+	IdPago         int64  `json:"id_pago"`
 	IdPlan         int64  `json:"id_plan"`
 	MontoPlan      int64  `json:"monto_plan"`
 	MontoMatricula int64  `json:"monto_matricula"`
 	NroCuotas      int    `json:"nro_cuotas"`
 	FechaTermino   string `json:"fecha_termino"`
 	IdEstado       int64  `json:"id_estado"`
-	IdSocio        string `json:"is_socio"`
+	Rut            string `json:"rut" gorm:"type:VARCHAR(10)"`
 }
 
 type Suscripciones []Suscripcion
@@ -22,19 +22,19 @@ const SuscripcionShema string = `CREATE TABLE db_grossgym_fitness.suscripcion (
 	id_suscripcion INT auto_increment NOT NULL,
 	fecha_creacion TIMESTAMP NOT NULL,
 	nro_transaccion varchar(100) NOT NULL,
-	id_tipo_pago INT NOT NULL,
+	id_pago INT NOT NULL,
 	id_plan INT NOT NULL,
 	monto_plan BIGINT NULL,
 	monto_matricula BIGINT NULL,
 	nro_cuotas INT NULL,
 	fecha_termino TIMESTAMP NULL,
 	id_estado INT NULL,
-	id_socio varchar(10) NOT NULL,
+	rut varchar(10) NOT NULL,
 	CONSTRAINT suscripcion_pk PRIMARY KEY (id_suscripcion),
-	CONSTRAINT suscripcion_tipo_pago_FK FOREIGN KEY (id_tipo_pago) REFERENCES db_grossgym_fitness.tipo_pago(id_pago),
+	CONSTRAINT suscripcion_tipo_pago_FK FOREIGN KEY (id_pago) REFERENCES db_grossgym_fitness.tipo_pago(id_pago),
 	CONSTRAINT suscripcion_plan_FK FOREIGN KEY (id_plan) REFERENCES db_grossgym_fitness.plan(id_plan),
 	CONSTRAINT suscripcion_estado_FK FOREIGN KEY (id_estado) REFERENCES db_grossgym_fitness.estado(id_estado),
-	CONSTRAINT suscripcion_socio_FK FOREIGN KEY (id_socio) REFERENCES db_grossgym_fitness.socio(rut)
+	CONSTRAINT suscripcion_rut_FK FOREIGN KEY (rut) REFERENCES db_grossgym_fitness.socio(rut)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4

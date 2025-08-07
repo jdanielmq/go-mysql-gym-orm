@@ -4,7 +4,7 @@ import "gorm/db"
 
 type InBody struct {
 	IdBody          int64  `json:"id_body" gorm:"primaryKey"`
-	IdSocio         string `json:"id_socio"`
+	Rut             string `json:"rut" gorm:"type:VARCHAR(10)"`
 	Habilitado      bool   `json:"habilitado"`
 	JsonInbody      string `json:"json_inbody"`
 	FechaEvaluacion string `json:"fecha_evaluacion"`
@@ -15,15 +15,15 @@ type InBody struct {
 type Inbodys []InBody
 
 const InBodyShema string = `CREATE TABLE db_grossgym_fitness.inbody (
-	id_inbody BIGINT auto_increment NOT NULL,
-	id_socio varchar(10) NOT NULL,
+	id_body INT auto_increment NOT NULL,
+	rut varchar(10) NOT NULL,
 	habilitado BOOL NOT NULL,
 	json_inbody json NOT NULL,
 	fecha_evaluacion TIMESTAMP NOT NULL,
 	comentario VARCHAR(100) NULL,
 	id_instructor INT NULL,
-	CONSTRAINT inbody_pk PRIMARY KEY (id_inbody),
-	CONSTRAINT inbody_socio_FK FOREIGN KEY (id_socio) REFERENCES db_grossgym_fitness.socio(rut),
+	CONSTRAINT inbody_pk PRIMARY KEY (id_body),
+	CONSTRAINT inbody_rut_FK FOREIGN KEY (rut) REFERENCES db_grossgym_fitness.socio(rut),
 	CONSTRAINT inbody_instructor_FK FOREIGN KEY (id_instructor) REFERENCES db_grossgym_fitness.instructor(id_instructor)
 )
 ENGINE=InnoDB
